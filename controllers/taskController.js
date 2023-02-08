@@ -12,7 +12,7 @@ const getAllTasks = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: 'failed',
+      status: 'fail',
       message: error.errors.name.message,
     });
   }
@@ -20,12 +20,12 @@ const getAllTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
   try {
-    const task = await Task.create(req.body);
+    const newTask = await Task.create(req.body);
 
     res.status(201).json({
       status: 'success',
       data: {
-        task,
+        task: newTask,
       },
     });
   } catch (error) {
@@ -36,14 +36,32 @@ const createTask = async (req, res) => {
   }
 };
 
-const getTask = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      //   task,
-      id: req.params.id,
-    },
-  });
+const getTask = async (req, res) => {
+  try {
+    // taskID is an alias of req.params.id ^_^
+    const { id: taskID } = req.params;
+    const task = await Task.findById(taskID);
+    // const task = await Task.findOne({ _id: taskID });
+
+    if (!task) {
+      return res.status(404).json({
+        status: 'fail',
+        message: `No task with id: ${taskID}`,
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error,
+    });
+  }
 };
 
 const updateTask = (req, res) => {
@@ -55,11 +73,27 @@ const updateTask = (req, res) => {
   });
 };
 
-const deleteTask = (req, res) => {
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
+const deleteTask = async (req, res) => {
+  try {
+    const task = await Task.findByIdAndDelete(req.params.id);
+
+    if (!task) {
+      return res.status(404).json({
+        status: 'fail',
+        message: `Invalid ID`,
+      });
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error,
+    });
+  }
 };
 
 module.exports = {
