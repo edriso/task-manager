@@ -1,26 +1,24 @@
-let tasks = [
-  {
-    name: 'go to gym',
-    completed: true,
-  },
-];
-
-let task = tasks[0];
+const Task = require('../models/Task');
 
 const getAllTasks = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      tasks,
+      tasks: [],
     },
   });
 };
 
-const createTask = (req, res) => {
+const createTask = async (req, res) => {
+  const task = await Task.create({
+    name: req.body.name,
+    completed: req.body.completed ? true : false,
+  });
+
   res.status(201).json({
     status: 'success',
     data: {
-      task: req.body,
+      task,
     },
   });
 };
@@ -39,7 +37,7 @@ const updateTask = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      task,
+      task: {},
     },
   });
 };
