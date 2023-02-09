@@ -1,8 +1,8 @@
 # task-manager
 
-Building a REST API for tasks project (frontend design was made by John Smilga)
+Building a REST API for tasks project (frontend design was made by John Smilga).
 
 ### Project Setup
 
-- Setup .env and set MONGO_URI variable equal to DB connection string.
-- Run `npm install` then `npm start`
+- Setup .env file, then set MONGO_URI variable equal to DB connection string.
+- Run `npm install`, then `npm start`.
