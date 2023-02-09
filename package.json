@@ -1,7 +1,7 @@
 {
   "name": "task-manager",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple to-do app",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
