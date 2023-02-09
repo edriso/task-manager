@@ -4,13 +4,7 @@ const getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find({});
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        results: tasks.length,
-        tasks,
-      },
-    });
+    res.status(200).json({ tasks });
   } catch (error) {
     res.status(500).json({
       status: 'fail',
@@ -23,12 +17,7 @@ const createTask = async (req, res) => {
   try {
     const newTask = await Task.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        task: newTask,
-      },
-    });
+    res.status(201).json({ task: newTask });
   } catch (error) {
     res.status(400).json({
       status: 'error',
@@ -51,12 +40,7 @@ const getTask = async (req, res) => {
       });
     }
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        task,
-      },
-    });
+    res.status(200).json({ task });
   } catch (error) {
     res.status(500).json({
       status: 'error',
@@ -80,12 +64,7 @@ const updateTask = async (req, res) => {
       });
     }
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        task,
-      },
-    });
+    res.status(200).json({ task });
   } catch (error) {
     res.status(500).json({
       status: 'error',
@@ -105,10 +84,7 @@ const deleteTask = async (req, res) => {
       });
     }
 
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
+    res.status(204).json({ task });
   } catch (error) {
     res.status(500).json({
       status: 'error',
