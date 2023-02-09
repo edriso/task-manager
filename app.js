@@ -11,7 +11,6 @@ app.use(express.json());
 app.use('/api/v1/tasks', taskRouter);
 
 const port = 3000;
-
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
