@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// mongoose.set('strictQuery', false);
 
 const TaskSchema = new mongoose.Schema({
   name: {
